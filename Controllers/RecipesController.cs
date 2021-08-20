@@ -26,11 +26,26 @@ namespace RecipesASPCoreMVCWebApp.Controllers
         }
 
         // GET: Recipes/ShowSearchForm
-        // when you hit the route Recipes and method ShowSearchForm, return a list of searched recipes
+        // when you hit the route Recipes and method ShowSearchForm, return a list of searched  filtered recipes
         public async Task<IActionResult> ShowSearchForm()
         {
             return View();
         }
+
+        // POST: Recipes/ShowSearchResults
+        /**
+         *  the method/view ShowSearchResults returns an item called IAActionResult and matched input from our search form
+         *  this can also return API calls - JSON data
+         *  return View(await _context.Recipe.ToListAsync()); -> return all recipes from db
+         *  Recipe.Where is eq to SQL - SELECT * FROM Recipes WHERE RecipeName = ""
+         *  r => r.RecipeName.Contains => will filter a list of recipes and show us only the recipes name with keyword entered
+         */
+        public async Task<IActionResult> ShowSearchResults( String SearchPhrase)
+        {
+            // return "You filled " + SearchPhrase;
+            return View("Index", await _context.Recipe.Where( r => r.RecipeName.Contains(SearchPhrase)).ToListAsync());
+        }
+
 
         // GET: Recipes/Details/5
         public async Task<IActionResult> Details(int? id)
