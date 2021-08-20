@@ -25,6 +25,13 @@ namespace RecipesASPCoreMVCWebApp.Controllers
             return View(await _context.Recipe.ToListAsync());
         }
 
+        // GET: Recipes/ShowSearchForm
+        // when you hit the route Recipes and method ShowSearchForm, return a list of searched recipes
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View(await _context.Recipe.ToListAsync());
+        }
+
         // GET: Recipes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
