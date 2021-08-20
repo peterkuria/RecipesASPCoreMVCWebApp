@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -66,6 +67,8 @@ namespace RecipesASPCoreMVCWebApp.Controllers
         }
 
         // GET: Recipes/Create
+
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -74,6 +77,7 @@ namespace RecipesASPCoreMVCWebApp.Controllers
         // POST: Recipes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,RecipeName,RecipeCat,RecipeDate,ingredients,PrepMtd,PrepTime,CookingTime,Servings")] Recipe recipe)
@@ -88,6 +92,7 @@ namespace RecipesASPCoreMVCWebApp.Controllers
         }
 
         // GET: Recipes/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -106,6 +111,8 @@ namespace RecipesASPCoreMVCWebApp.Controllers
         // POST: Recipes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // this is for processing editing 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,RecipeName,RecipeCat,RecipeDate,ingredients,PrepMtd,PrepTime,CookingTime,Servings")] Recipe recipe)
@@ -139,6 +146,7 @@ namespace RecipesASPCoreMVCWebApp.Controllers
         }
 
         // GET: Recipes/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -157,6 +165,7 @@ namespace RecipesASPCoreMVCWebApp.Controllers
         }
 
         // POST: Recipes/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
